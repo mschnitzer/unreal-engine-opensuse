@@ -74,3 +74,25 @@ make -j6
 (If make is not available, install it via `zypper install make`)
 
 This can take some hours or minutes, depending on your CPU.
+
+#### 4. Running the Editor
+
+The engine should have been built by now. You can try running editor, but it likely will fail. Anyway, let's try it. Go to your engine git checkout directory and call the UE4Editor binary which is located at `Engine/Binaries/Linux/UE4Editor` relative to your unreal engine git checkout directory.
+
+However, it will probably fail at launch saying that it misses Vulkan support. Run the following command to install the missing dependencies:
+
+For an intel GPU:
+
+```
+zypper install libvulkan_intel libvulkan_intel-32bit
+```
+
+or if you have an AMD GPU, run:
+
+```
+zypper install libvulkan_radeon libvulkan_radeon-32bit
+```
+
+Try to open the UE4Editor binary again. In my case it showed me that a driver is missing to run Vulkan. This happened because I didn't install any GPU driver on my Linux system so far. As I'm having an NVIDIA GPU, I opened the official openSUSE documentation on how to install an NVIDIA graphics card driver: https://en.opensuse.org/SDB:NVIDIA_drivers
+
+I installed the graphics card driver that matched my GPU and after a reboot (including enabling the kernel driver module as described in the documentation), the UE4Editor could be opened just fine.
