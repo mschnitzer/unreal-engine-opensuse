@@ -96,3 +96,54 @@ zypper install libvulkan_radeon libvulkan_radeon-32bit
 Try to open the UE4Editor binary again. In my case it showed me that a driver is missing to run Vulkan. This happened because I didn't install any GPU driver on my Linux system so far. As I'm having an NVIDIA GPU, I opened the official openSUSE documentation on how to install an NVIDIA graphics card driver: https://en.opensuse.org/SDB:NVIDIA_drivers
 
 I installed the graphics card driver that matched my GPU and after a reboot (including enabling the kernel driver module as described in the documentation), the UE4Editor could be opened just fine.
+
+#### 5. Creating your first project
+
+##### 5.1 Blueprint Projects
+
+You are able to create a blueprint project via the UE4Editor. It should just work fine and out of the box.
+
+##### 5.2 C++ Projects
+
+Creating C++ projects does not work out of the box. You will notice that after creation of the project, the UE4Editor closes and a text editor opens. The reason for that is that the compilation process needs to be triggered manually after the C++ project creation. Please navigate to your Unreal Engine project location (which you just have created). A `Makefile` should be there. My project directory looks like this:
+
+```
+manuel@localhost:~/Documents/Unreal Projects/MyProject3> l
+total 4984
+drwxr-xr-x 11 manuel users    4096 Apr 29 17:02 ./
+drwxr-xr-x  5 manuel users    4096 Apr 28 20:31 ../
+drwxr-xr-x  3 manuel users    4096 Apr 28 20:34 Binaries/
+-rw-r--r--  1 manuel users   87489 Apr 28 20:33 CMakeLists.txt
+drwxr-xr-x  2 manuel users    4096 Apr 28 20:31 Config/
+drwxr-xr-x  9 manuel users    4096 Apr 29 17:04 Content/
+drwxr-xr-x  3 manuel users    4096 Apr 29 17:04 DerivedDataCache/
+-rw-r--r--  1 manuel users      29 Apr 28 20:32 .ignore
+drwxr-xr-x  8 manuel users    4096 Apr 29 17:05 Intermediate/
+drwxr-xr-x  2 manuel users    4096 Apr 28 20:32 .kdev4/
+-rw-r--r--  1 manuel users   38842 Apr 28 20:31 Makefile
+-rw-r--r--  1 manuel users  419137 Apr 28 20:33 MyProject3CodeCompletionFolders.txt
+-rw-r--r--  1 manuel users       0 Apr 28 20:33 MyProject3CodeLitePreProcessor.txt
+-rw-r--r--  1 manuel users     354 Apr 28 20:32 MyProject3.code-workspace
+-rw-r--r--  1 manuel users  150697 Apr 28 20:33 MyProject3Config.pri
+-rw-r--r--  1 manuel users      13 Apr 28 20:33 MyProject3Defines.pri
+-rw-r--r--  1 manuel users 1906847 Apr 28 20:33 MyProject3Header.pri
+-rw-r--r--  1 manuel users  370864 Apr 28 20:33 MyProject3Includes.pri
+-rw-r--r--  1 manuel users      59 Apr 28 20:32 MyProject3.kdev4
+-rw-r--r--  1 manuel users   40444 Apr 28 20:33 MyProject3.pro
+-rw-r--r--  1 manuel users 1468726 Apr 28 20:33 MyProject3Source.pri
+-rw-r--r--  1 manuel users     224 Apr 28 20:31 MyProject3.uproject
+-rw-r--r--  1 manuel users  539289 Apr 28 20:33 MyProject3.workspace
+drwxr-xr-x  6 manuel users    4096 Apr 29 17:05 Saved/
+drwxr-xr-x  3 manuel users    4096 Apr 28 20:31 Source/
+drwxr-xr-x  4 manuel users    4096 Apr 28 20:32 .vscode/
+````
+
+In order to open the project inside of the Unreal Editor, I built the 'MyProject3Editor' target of the Makefile. Run the following command inside your UE4 project directory:
+
+```
+make MyProject3Editor
+```
+
+You need to replace `MyProject3` editor with the name of your project and append `Editor` to it. If your project is named `BlaBlaBla`, then the command would be `make BlaBlaBlaEditor`.
+
+As soon as this has built, you can open the `UE4Editor` binary again and open the project. It may not be visible in your recent projects, but by clicking `More` you can search for projects on your hard drive.
