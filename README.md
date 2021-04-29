@@ -150,3 +150,7 @@ As soon as this has built, you can open the `UE4Editor` binary again and open th
 
 
 Please note that whenever you add new C++ classes to your project, you need to run that exact same `make` command again to build your sources. I guess the `Compile` function from within the editor works as well, but I didn't test it.
+
+#### 6. Reporting Issues
+
+If you are running into issues with the Unreal Editor 4 on openSUSE, feel free to create an issue for this repository. I may not be able to help with any issue, but I can try to give my thoughts on the issues you encounter.
